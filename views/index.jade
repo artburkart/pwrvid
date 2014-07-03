@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    #mainDiv.container
+        h1= title
+        p Welcome to #{title}
+        video(autoplay='autoplay')
+        button#qvga.btn.btn-warning 320x240
+        button#vga.btn.btn-success 640x480
+        button#hd.btn.btn-info 1366x768
+        p#dimensions
+    script(type='text/javascript', src='javascripts/getUserMedia.js')
