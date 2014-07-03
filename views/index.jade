@@ -1,12 +1,15 @@
 extends layout
 
 block content
-    #mainDiv.container
-        h1= title
-        p Welcome to #{title}
+  #mainDiv.container
+    h1= title
+    p Welcome to #{title}
+    div.well.col-md-8.col-md-offset-2
+      div.row.text-center
         video(autoplay='autoplay')
+      div.row.text-center
         button#qvga.btn.btn-warning 320x240
         button#vga.btn.btn-success 640x480
         button#hd.btn.btn-info 1366x768
-        p#dimensions
-    script(type='text/javascript', src='javascripts/getUserMedia.js')
+    p#dimensions
+  script(type='text/javascript', src='javascripts/getUserMedia.js')
