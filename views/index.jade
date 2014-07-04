@@ -1,15 +1,32 @@
 extends layout
 
 block content
-  #mainDiv.container
+  #mainDiv.container.text-center
     h1= title
     p Welcome to #{title}
-    div.well.col-md-8.col-md-offset-2
-      div.row.text-center
+    div.well.col-md-8.col-md-offset-2.row
+      div.row
         video(autoplay='autoplay')
-      div.row.text-center
+      div.row
         button#qvga.btn.btn-warning 320x240
         button#vga.btn.btn-success 640x480
         button#hd.btn.btn-info 1366x768
+    div.well.col-md-8.col-md-offset-2.row
+      h1 Local PeerConnection() Example
+      div.row
+        h4.col-md-3.col-md-offset-2 Local Video
+        h4.col-md-3.col-md-offset-2 Remote Video
+      div.row
+          video#localVideo(autoplay='autoplay')
+      div.row
+          video#remoteVideo(autoplay='autoplay')
+      div.row
+        div.btn-group
+          button#startButton.btn.btn-default Start
+          button#callButton.btn.btn-success Call
+          button#hangupButton.btn.btn-danger Hang Up
+
+
     p#dimensions
   script(type='text/javascript', src='javascripts/getUserMedia.js')
+  script(type='text/javascript', src='javascripts/localPeerConnection.js')

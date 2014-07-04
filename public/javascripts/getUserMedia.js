@@ -8,8 +8,7 @@ var hdButton = document.querySelector("button#hd");
 var stream;
 
 navigator.getUserMedia = navigator.getUserMedia
-    || navigator.webkitGetUserMedia
-    || navigator.mozGetUserMedia;
+    || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 function success(stream) {
     window.stream = stream;
