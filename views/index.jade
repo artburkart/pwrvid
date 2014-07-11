@@ -8,9 +8,10 @@ block content
       div.row
         video(autoplay='autoplay')
       div.row
-        button#qvga.btn.btn-warning 320x240
-        button#vga.btn.btn-success 640x480
-        button#hd.btn.btn-info 1366x768
+        div.btn-group
+          button#qvga.btn.btn-warning 320x240
+          button#vga.btn.btn-success 640x480
+          button#hd.btn.btn-info 1366x768
     div.well.col-md-8.col-md-offset-2.row
       h1 Local PeerConnection() Example
       div.row
@@ -25,8 +26,19 @@ block content
           button#startButton.btn.btn-default Start
           button#callButton.btn.btn-success Call
           button#hangupButton.btn.btn-danger Hang Up
+    div.well.col-md-8.col-md-offset-2.row
+      h1 DataChannel Simple Example
+      div.row
+        div.col-md-6
+          textarea#dataChannelSend.form-control(rows='5' disabled='disabled', placeholder='(1) Press Start. (2) Enter text. (3) Press Send.')
+        div.col-md-6 
+          textarea#dataChannelReceive.form-control(rows='5' disabled='disabled')
+      div#buttons.row
+        div.btn-group
+          button#startButton2.btn.btn-default Start
+          button#sendButton.btn.btn-success Send
+          button#closeButton.btn.btn-danger Stop
 
-
-    p#dimensions
   script(type='text/javascript', src='javascripts/getUserMedia.js')
   script(type='text/javascript', src='javascripts/localPeerConnection.js')
+  script(type='text/javascript', src='javascripts/dataChannel.js')

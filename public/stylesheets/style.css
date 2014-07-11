@@ -10,3 +10,7 @@ a {
 video {
     background-color:grey;
 }
+
+div.row {
+    margin-bottom:10px;
+}
