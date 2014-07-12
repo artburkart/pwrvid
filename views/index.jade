@@ -31,14 +31,20 @@ block content
       div.row
         div.col-md-6
           textarea#dataChannelSend.form-control(rows='5' disabled='disabled', placeholder='(1) Press Start. (2) Enter text. (3) Press Send.')
-        div.col-md-6 
+        div.col-md-6
           textarea#dataChannelReceive.form-control(rows='5' disabled='disabled')
       div#buttons.row
         div.btn-group
           button#startButton2.btn.btn-default Start
           button#sendButton.btn.btn-success Send
           button#closeButton.btn.btn-danger Stop
+    div.well.col-md-8.col-md-offset-2.row
+      h1 WebRTC Client
+      div.row
+        div#scratchPad
 
+  script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/socket.io/0.9.16/socket.io.min.js')
   script(type='text/javascript', src='javascripts/getUserMedia.js')
   script(type='text/javascript', src='javascripts/localPeerConnection.js')
   script(type='text/javascript', src='javascripts/dataChannel.js')
+  script(type='text/javascript', src='javascripts/simpleNodeClient.js')
