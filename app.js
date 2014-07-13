@@ -1,4 +1,4 @@
-/*jslint browser: true, indent: 4 */
+/*jslint node: true, indent: 4 */
 
 var express = require('express');
 var path = require('path');
@@ -57,6 +57,86 @@ app.use(function (err, req, res, next) {
     res.render('error', {
         message: err.message,
         error: {}
+    });
+});
+
+var clients_dict = {};
+
+// Let's start managing connections...
+io.sockets.on('connection', function (socket) {
+    function clients(channel) {
+        return clients_dict[channel] || [];
+    }
+    io.sockets.clients = clients;
+
+    // Handle 'create or join' messages
+    socket.on('create or join', function (channel) {
+        var numClients = io.sockets.clients(channel).length;
+        console.log('numclients = ' + numClients);
+
+        // First client joining...
+        if (numClients === 0) {
+            socket.join(channel);
+            clients_dict[channel] = [1];
+            socket.emit('created', channel);
+
+        // Second client joining...
+        } else if (numClients === 1) {
+            clients_dict[channel] = [1, 2];
+            // Inform initiator...
+            io.sockets.in(channel).emit('remotePeerJoining', channel);
+
+            // Let the new peer join channel
+            socket.join(channel);
+            socket.broadcast.to(channel).emit('broadcast: joined', 'S --> broadcast(): client ' + socket.id + ' joined channel ' + channel);
+
+        // Max two clients
+        } else {
+            console.log("Channel full!");
+            socket.emit('full', channel);
+        }
+    });
+
+    // Handle 'Bye' messages
+    socket.on('Bye', function (channel) {
+        clients_dict[channel] = undefined;
+
+        // Notify other peer
+        socket.broadcast.to(channel).emit('Bye');
+
+        // Close socket from server's side
+        socket.disconnect();
+    });
+
+    // Handle 'Ack' messages
+    socket.on('Ack', function () {
+        console.log('Got an Ack!');
+
+        // Close socket from server's side
+        socket.disconnect();
+    });
+
+    // Utility function used for remote logging
+    function log() {
+        var array = [">>> "];
+        for (var i = 0; i < arguments.length; i++) {
+            array.push(arguments[i]);
+        }
+        socket.emit('log', array);
+    }
+
+    // Handle 'message' messages
+    socket.on('message', function (message) {
+        log('S --> Got message: ', message);
+        socket.broadcast.to(message.channel).emit('message', message.message);
+    });
+
+    // Handle 'response' messages
+    socket.on('response', function (response) {
+        log('S --> Got response: ', response);
+
+        // Just forward message to the other peer
+        socket.broadcast.to(response.channel).emit('response', response.message);
     });
 });
 

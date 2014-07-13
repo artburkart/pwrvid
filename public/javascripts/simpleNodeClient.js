@@ -5,12 +5,12 @@
 var div = document.getElementById('scratchPad');
 
 // Connect to server
-var socket = io.connect('http://localhost:8181');
+var socket = io.connect('http://localhost:4000');
 
 // Ask channel name from user
-var channel = prompt("Enter signaling channel name:");
+var channel = prompt('Enter signaling channel name:');
 
-if (channel !== "") {
+if (channel !== '') {
     console.log('Trying to create or join channel: ', channel);
 
     // Send 'create or join' to the server
@@ -57,7 +57,7 @@ socket.on('broadcast: joined', function (msg) {
 
     // Start chatting with remote peer:
     // 1. Get user's message
-    var myMessage = prompt('Insert message to be sent to your peer:', "");
+    var myMessage = prompt('Insert message to be sent to your peer:', '');
 
     // 2. Send to remote peer (through server)
     socket.emit('message', {channel: channel, message: myMessage});
@@ -76,7 +76,7 @@ socket.on('message', function (message) {
 
     // Send back response message:
     // 1. Get response from user
-    var myResponse = prompt('Send response to other peer:', "");
+    var myResponse = prompt('Send response to other peer:', '');
 
     // 2. Send it to remote peer (through server)
     socket.emit('response', {channel: channel, message: myResponse});
@@ -89,7 +89,7 @@ socket.on('response', function (response) {
     div.insertAdjacentHTML('beforeEnd', '<p style="color:blue">' + response + '</p>');
 
     // Keep on chatting
-    var chatMessage = prompt('Keep on chatting. Write "Bye" to quit conversation', "");
+    var chatMessage = prompt('Keep on chatting. Write "Bye" to quit conversation', '');
 
     // User wants to quit conversation: send 'Bye' to remote party
     if (chatMessage === "Bye") {

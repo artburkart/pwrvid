@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 var debug = require('debug')('pwrvid');
-var app = require('../app');
+var app = require('../app').app;
+var server = require('../app').server;
 
-app.server.listen(app.app.get('port'), function() {
-  debug('Express server listening on port ' + app.server.address().port);
+server.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
 });
