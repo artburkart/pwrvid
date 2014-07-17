@@ -1,8 +1,7 @@
 /*jslint browser: true, indent: 4, devel: true */
 /*global attachMediaStream: false, webrtcDetectedBrowser: false,
-RTCPeerConnection: false, trace: false,  */
-
-'use strict';
+RTCPeerConnection: false, trace: false, io: false,
+RTCSessionDescription: false, RTCIceCandidate: false*/
 
 // Look after different browser vendors' ways of calling the getUserMedia()
 // API method:
