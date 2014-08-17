@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  #mainDiv.container.text-center
+    h1=title
+    p Welcome to #{title}
+    div.well.col-md-8.col-md-offset-2.row
+      div.row
+        div.col-md-6 Local Video
+        div.col-md-6 Remote Video
+      div.row
+        div.col-md-6
+          video#localVideo(autoplay="autoplay")
+        div.col-md-6
+          video#remoteVideo(autoplay="autoplay")
+      div.row
+        div.col-md-6.col-md-offset-2
+          textarea#dataChannelSend(rows="4", cols="60", disabled="disabled", placeholder="This will be enabled once the data channel is up.")
+        div.col-md-6.col-md-offset-2
+          textarea#dataChannelReceive(rows="4", cols="60", disabled="disabled")
+        div.col-md-6.col-md-offset-3
+          button#sendButton.btn.btn-success(disabled="disabled") Send
+
+  script(type="text/javascript", src="javascripts/dist/socket.io.js")
+  script(type="text/javascript", src="javascripts/dist/adapter.js")
+  script(type="text/javascript", src="javascripts/completeNodeClientWithDataChannel.js")
+
