@@ -1,0 +1,17 @@
+{
+"undef": true,
+"bitwise": true,
+"eqeqeq": true,
+"forin": true,
+"freeze": true,
+"immed": true,
+"latedef": true,
+"newcap": true,
+"noarg": true,
+"nonew": true,
+"plusplus": true,
+"quotmark": "single",
+"undef": true,
+"unused": "vars",
+"predef": ["WebSocket", "location", "window"]
+}
